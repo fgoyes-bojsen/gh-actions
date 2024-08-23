@@ -1,0 +1,24 @@
+name: ci
+
+on: 
+  push:
+    branches: ["main"]
+
+jobs:
+  replace: 
+    name: replace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout step
+        uses: actions/checkout@v4
+      - name: Replace step
+        uses: Langsdorf/env-replace@v1.0.5
+        with:
+          file: './myFile/env.ts'
+          match-secrets: "true"
+          secrets: |
+            SECRET=${{ secrets.SECRET }}
+      - name: Verify step
+        run: |
+            nano ./myFile/env.ts
+            
