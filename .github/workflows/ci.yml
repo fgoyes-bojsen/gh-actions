@@ -18,7 +18,8 @@ jobs:
           match-secrets: "true"
           secrets: |
             SECRET=${{ secrets.SECRET }}
-      - name: Verify step
-        run: |
-            nano ./myFile/env.ts
+      - name: "Read file contents"
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "./myFile/env.ts"
             
